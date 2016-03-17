@@ -1,0 +1,21 @@
+{
+    "name": "rodrigopolo/vlog",
+    "description": "Video blog entries from YouTube",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rodrigo Polo",
+            "email": "rodrigo.polo@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "gabordemooij/redbean": "^4.3"
+    },
+    "autoload": {
+        "classmap": [
+            "app/lib"
+        ]
+    }
+}

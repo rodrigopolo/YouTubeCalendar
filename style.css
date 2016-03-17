@@ -1,0 +1,136 @@
+@font-face {
+	font-family: 'SF';
+	src:
+		url('fonts/SFRegular.svg') format("svg"),
+		url('fonts/SFRegular.otf') format("opentype")
+	;
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SF';
+	src:
+		url('fonts/SFRegularItalic.svg') format("svg"),
+		url('fonts/SFRegularItalic.otf') format("opentype")
+	;
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'SF';
+	src:
+		url('fonts/SFBold.svg') format("svg"),
+		url('fonts/SFBold.otf') format("opentype")
+	;
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SF';
+	src:
+		url('fonts/SFBoldItalic.svg') format("svg"),
+		url('fonts/SFBoldItalic.otf') format("opentype")
+	;
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'SFth';
+	src:
+		url('fonts/SFThin.svg') format("svg"),
+		url('fonts/SFThin.otf') format("opentype")
+	;
+	font-weight: normal;
+	font-style: normal;
+}
+
+body{
+	 overflow-x:hidden;
+}
+
+
+*{
+	font-family: 'SF';
+}
+
+.fullcal{
+	margin: 0 auto;
+	width: 1024px;
+}
+
+.fullcal h1{
+	font-size: 60px;
+}
+
+.fullcal p{
+	font-size: 18px;
+}
+
+.main{
+	padding: 0 10px;
+}
+
+.cal h1{
+	font-family: 'SFth';
+	font-size: 86px;
+	clear: both;
+}
+
+.c_col{
+	width: 1015px;
+	height: 580px;
+	float: left;
+	margin: 0 0 50px 0;
+}
+
+.c_col h2{
+	font-size: 43px;
+	color: #f00;
+	padding: 4px 10px 1px 10px;
+	margin: 0;
+}
+
+.c_col .lb{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+
+	display: block;
+	width: 145px;
+	height: 82px;
+	background: #fff;
+	float: left;
+	text-align: left;
+	margin: 6px 0 0 0;
+	padding: 0px 0px 0 2px;
+}
+
+.c_col .lb h3{
+	font-size: 20px;
+	margin: 0;
+}
+.c_col .lb .in{
+	color:#fff;
+	text-shadow: #000 2px 2px 2px;
+}
+
+.c_col .lb p{
+	margin: 0px 0 1px;
+	line-height: 10px;
+}
+
+.c_col .lb a{
+	font-size: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	color:#fff;
+	text-shadow: #000 1px 1px 2px, #000 -1px -1px 2px;
+}
+
+.c_col .lb a:hover{
+	color: #ffa800;
+}
+
+
