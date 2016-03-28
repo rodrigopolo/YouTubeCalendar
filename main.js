@@ -107,6 +107,10 @@ $(function() {
 		e.preventDefault();
 	});
 
+	$('.lb a').click(function(e){
+		 e.stopPropagation();
+	});
+
 	
 });
 
