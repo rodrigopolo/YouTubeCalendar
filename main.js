@@ -99,7 +99,7 @@ $(function() {
 				self.removeClass('done');
 				Cookies.remove(day);
 			}else{
-				Cookies.set(day, true);
+				Cookies.set(day, true, { expires: 365 });
 				self.addClass('done');
 			}
 
