@@ -49,9 +49,12 @@ $(function() {
 
 		var r = '<div class="c_col">';
 		r += '<h2>'+month_name+'</h2>';
+
+		// First blanks
 		for (var i = 0; i < start_fill; i++) {
 			r += '<div class="lb">&nbsp;</div>';			
 		}
+		// Days
 		for (var i = 1; i <= num_days; i++) {
 
 			r += dayData(i, moment({
@@ -61,6 +64,7 @@ $(function() {
 			}).format('YYYYMMDD'));
 		
 		}
+		// Last blanks
 		for (var i = 0; i < post_fill; i++) {
 			r += '<div class="lb">&nbsp;</div>';			
 		}
@@ -79,13 +83,29 @@ $(function() {
 				rin+= '<p><a href="http://youtu.be/'+jsonx[x][i].i+'">'+jsonx[x][i].t+'</a></p>'
 			}
 		}
-		var r = '<div class="lb"'+bk+'>';
+		var isdone = (Cookies.get(x))?' done':'';
+		var r = '<div class="lb'+isdone+'"'+bk+' data-day="'+x+'">';
 		r += '<h3'+ch+'>'+day+'</h3>';
 		r+= rin;
 		r += '</div>';
 		return r;
 	}
 
+	$('.lb').click(function(e){
+		var self = $(this);
+		var day = self.attr('data-day');
+		if(day){
+			if(self.hasClass('done')){
+				self.removeClass('done');
+				Cookies.remove(day);
+			}else{
+				Cookies.set(day, true);
+				self.addClass('done');
+			}
+
+		}
+		e.preventDefault();
+	});
 
 	
 });

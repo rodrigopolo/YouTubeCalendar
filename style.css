@@ -134,3 +134,10 @@ body{
 }
 
 
+.done::before{
+	content: " ";
+	position: absolute;
+	width: 145px;
+	height: 82px;
+	background: url(cruz.png) no-repeat;
+}
