@@ -1,52 +1,52 @@
 <?php
-// Set Time zone
-date_default_timezone_set("UTC");
+	// Set Time zone
+	date_default_timezone_set("UTC");
 
-// Load Config
-require 'app/config.php';
+	// Load Config
+	require 'app/config.php';
 
-// Composer
-require __DIR__ . '/vendor/autoload.php';
+	// Composer
+	require __DIR__ . '/vendor/autoload.php';
 
-// RedBeanPHP alias fix
-class R extends RedBeanPHP\Facade {}
-// RedBeanPHP setup
-R::setup('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
-R::freeze(DB_FREEZE);
+	// RedBeanPHP alias fix
+	class R extends RedBeanPHP\Facade {}
+	// RedBeanPHP setup
+	R::setup('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+	R::freeze(DB_FREEZE);
 
-$q = 
-	'SELECT
-		*
-	FROM 
-		`videos` 
-	WHERE 
-		`user` = ? 
-		AND `date` >= "'.START_DATE.'"
-	ORDER BY 
-		`date` ASC
-	';
-
-
-$videos = R::getAll($q,[YOUTUBE_USER]);
+	$q = 
+		'SELECT
+			*
+		FROM 
+			`videos` 
+		WHERE 
+			`user` = ? 
+			AND `date` >= "'.START_DATE.'"
+		ORDER BY 
+			`date` ASC
+		';
 
 
-$json = [];
+	$videos = R::getAll($q,[YOUTUBE_USER]);
 
-// For View
-foreach ($videos as $video) {
-	$date = new DateTime($video['date']);
-	$start = $date->format('Ymd');
-	if(!$json[$start]){
-		$json[$start]=[];
+
+	$json = [];
+
+	// For View
+	foreach ($videos as $video) {
+		$date = new DateTime($video['date']);
+		$start = $date->format('Ymd');
+		if(!$json[$start]){
+			$json[$start]=[];
+		}
+		$json[$start][] = [
+			't' 	=> $video['title'],
+			'i' 	=> $video['ytid']
+		];
 	}
-	$json[$start][] = [
-		't' 	=> $video['title'],
-		'i' 	=> $video['ytid']
-	];
-}
 
-$date_start = substr($videos[0]['date'], 0, 10);
-$date_stop  = substr($videos[count($videos)-1]['date'], 0, 10);
+	$date_start = substr($videos[0]['date'], 0, 10);
+	$date_stop  = substr($videos[count($videos)-1]['date'], 0, 10);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -94,8 +94,9 @@ $date_stop  = substr($videos[count($videos)-1]['date'], 0, 10);
 
 		<!-- JS -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/depot/0.1.6/depot.min.js"></script>
 		<!--
+		<script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>

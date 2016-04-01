@@ -1,5 +1,8 @@
 $(function() {
 
+	// Local Storage instead of cookies
+	var watched = depot('watched');
+
 	var start = moment(date_start, 'YYYY-MM-DD');
 	var stop  = moment(date_stop, 'YYYY-MM-DD');
 
@@ -83,7 +86,8 @@ $(function() {
 				rin+= '<p><a href="http://youtu.be/'+jsonx[x][i].i+'">'+jsonx[x][i].t+'</a></p>'
 			}
 		}
-		var isdone = (Cookies.get(x))?' done':'';
+		//var isdone = (Cookies.get(x))?' done':'';
+		var isdone = (watched.find({ _id: x}).length>0)?' done':'';
 		var r = '<div class="lb'+isdone+'"'+bk+' data-day="'+x+'">';
 		r += '<h3'+ch+'>'+day+'</h3>';
 		r+= rin;
@@ -97,9 +101,11 @@ $(function() {
 		if(day){
 			if(self.hasClass('done')){
 				self.removeClass('done');
-				Cookies.remove(day);
+				//Cookies.remove(day);
+				watched.destroyAll({ _id: day});
 			}else{
-				Cookies.set(day, true, { expires: 365 });
+				//Cookies.set(day, true, { expires: 365 });
+				watched.save({ _id: day});
 				self.addClass('done');
 			}
 
