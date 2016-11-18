@@ -24,3 +24,8 @@ mysql -h host -u user -pPass sb < db.sql --default-character-set=utf8
 
 ####Update
 I added cookies in order to mark watched videos, but the storage wasn't enough, so I switched to `localstorage`, sorry.
+
+-------
+
+### Donations
+[PayPal](http://paypal.me/rodrigopolo)
