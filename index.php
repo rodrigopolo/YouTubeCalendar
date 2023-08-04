@@ -14,15 +14,15 @@
 	R::setup('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
 	R::freeze(DB_FREEZE);
 
-	$q = 
+	$q =
 		'SELECT
 			*
-		FROM 
-			`videos` 
-		WHERE 
-			`user` = ? 
+		FROM
+			`videos`
+		WHERE
+			`user` = ?
 			AND `date` >= "'.START_DATE.'"
-		ORDER BY 
+		ORDER BY
 			`date` ASC
 		';
 
@@ -59,6 +59,7 @@
 
 		<title>Casey Neistat Vlog Archive</title>
 
+		<link rel="icon" type="image/ico" href="favicon.ico">
 		<!-- Bootstrap -->
 		<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
@@ -109,7 +110,7 @@
 		</script>
 
 		<script src="main.js"></script>
-		
+
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
