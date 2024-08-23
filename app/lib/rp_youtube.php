@@ -16,7 +16,7 @@ class YoutubePub{
 	public function get($endpoint, $op){
 		$op['key'] = $this->key;
 		$url = $this->api_url.$endpoint.'?'.$this->query($op);
-		$r = file_get_contents($url);
+		$r = $this->fetch_url_content($url);
 		if($this->json){
 			return $r;
 		}else{
@@ -31,6 +31,25 @@ class YoutubePub{
 			$query_array[] = urlencode( $key ) . '=' . urlencode( $key_value );
 		}
 		return implode( '&', $query_array );
+	}
+
+	// 
+	private function fetch_url_content($url){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		$content = curl_exec($ch);
+
+		if (curl_errno($ch)) {
+			$error_msg = 'Error: ' . curl_error($ch);
+			curl_close($ch);
+			return $error_msg;
+		}
+
+		curl_close($ch);
+		return $content;
 	}
 
 }
