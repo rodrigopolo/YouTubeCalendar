@@ -56,7 +56,8 @@ body{
 
 .fullcal{
 	margin: 0 auto;
-	width: 1024px;
+	max-width: 1024px;
+	width: 100%;
 }
 
 .fullcal h1{
@@ -141,4 +142,40 @@ body{
 	width: 145px;
 	height: 82px;
 	background: url(cruz.png) no-repeat;
+}
+
+.year-nav {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	clear: both;
+}
+
+.year-nav h1 {
+	margin: 0;
+}
+
+.year-nav button {
+	font-family: 'SF';
+	font-size: 40px;
+	background: none;
+	border: none;
+	color: #f00;
+	cursor: pointer;
+	padding: 0 10px;
+	line-height: 1;
+}
+
+.year-nav button:disabled {
+	color: #ccc;
+	cursor: default;
+}
+
+.year-nav button:not(:disabled):hover {
+	color: #c00;
+}
+@media (max-width: 1034px) {
+    .cal {
+        zoom: calc((100vw - 20px) / 1015);
+    }
 }

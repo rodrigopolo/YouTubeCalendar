@@ -8,32 +8,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	function addWatched(day)    { var w = getWatched(); if (!w.includes(day)) { w.push(day); localStorage.setItem('watched', JSON.stringify(w)); } }
 	function removeWatched(day) { localStorage.setItem('watched', JSON.stringify(getWatched().filter(function(d) { return d !== day; }))); }
 
-	var start = dayjs(date_start, 'YYYY-MM-DD');
-	var stop  = dayjs(date_stop, 'YYYY-MM-DD');
+	var first_year   = dayjs(date_start).year();
+	var last_year    = dayjs(date_stop).year();
+	var current_year = first_year;
 
-	var start_month = start.month();
-	var stop_month  = stop.month();
+	function renderYear(year) {
+		cal.innerHTML = '';
 
-	var drw_start = dayjs(new Date(start.year(), start_month, 1));
-	var drw_stop  = dayjs(new Date(stop.year(), stop_month, 1)).endOf('month');
+		var prevDis = (year <= first_year) ? ' disabled' : '';
+		var nextDis = (year >= last_year)  ? ' disabled' : '';
+		cal.insertAdjacentHTML('beforeend',
+			'<div class="year-nav">' +
+				'<button class="year-prev"' + prevDis + '>&#9664;</button>' +
+				'<h1>' + year + '</h1>' +
+				'<button class="year-next"' + nextDis + '>&#9654;</button>' +
+			'</div><hr>'
+		);
 
-	var loop_counter = drw_start;
-
-	// First year label
-	var start_year = start.year();
-	cal.insertAdjacentHTML('beforeend', '<h1>' + start_year + '</h1><hr>');
-
-	// Month loop
-	while (loop_counter.isBefore(drw_stop)) {
-		if (loop_counter.year() !== start_year) {
-			start_year = loop_counter.year();
-			cal.insertAdjacentHTML('beforeend', '<h1>' + start_year + '</h1><hr>');
+		for (var m = 0; m < 12; m++) {
+			cal.insertAdjacentHTML('beforeend',
+				createMonth(dayjs(new Date(year, m, 1)))
+			);
 		}
-		cal.insertAdjacentHTML('beforeend', createMonth(loop_counter));
-		loop_counter = loop_counter.add(1, 'M');
 	}
 
-	jsonx = null;
+	renderYear(current_year);
 
 
 	// Month
@@ -83,8 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		return r;
 	}
 
-	// Event delegation for .lb clicks
+	// Event delegation
 	cal.addEventListener('click', function(e) {
+		if (e.target.classList.contains('year-prev') && current_year > first_year) {
+			current_year--;
+			renderYear(current_year);
+			return;
+		}
+		if (e.target.classList.contains('year-next') && current_year < last_year) {
+			current_year++;
+			renderYear(current_year);
+			return;
+		}
+
 		var lb = e.target.closest('.lb');
 		if (!lb) return;
 
