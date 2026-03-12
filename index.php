@@ -1,52 +1,47 @@
 <?php
-	// Set Time zone
-	date_default_timezone_set("UTC");
 
-	// Load Config
-	require 'app/config.php';
+/**
+ * index.php — Calendar view of a YouTube channel's video archive.
+ *
+ * Queries the local database for all videos uploaded by the configured
+ * channel since START_DATE, groups them by day, and renders a calendar UI.
+ */
 
-	// Composer
-	require __DIR__ . '/vendor/autoload.php';
+date_default_timezone_set('UTC');
 
-	// RedBeanPHP alias fix
-	class R extends RedBeanPHP\Facade {}
-	// RedBeanPHP setup
-	R::setup('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
-	R::freeze(DB_FREEZE);
+require __DIR__ . '/app/config.php';
+require __DIR__ . '/app/lib/Database.php';
 
-	$q = 
-		'SELECT
-			*
-		FROM 
-			`videos` 
-		WHERE 
-			`user` = ? 
-			AND `date` >= "'.START_DATE.'"
-		ORDER BY 
-			`date` ASC
-		';
+// --- Data ---
 
+$videos = Database::getInstance()->query(
+    'SELECT *
+     FROM `videos`
+     WHERE `user` = ?
+       AND `date` >= ?
+     ORDER BY `date` ASC',
+    [YOUTUBE_USER, START_DATE]
+);
 
-	$videos = R::getAll($q,[YOUTUBE_USER]);
+/** @var array<string, list<array{t: string, i: string}>> $json */
+$json = [];
 
+foreach ($videos as $video) {
+    $date  = new DateTimeImmutable($video['date']);
+    $start = $date->format('Ymd');
 
-	$json = [];
+    if (!isset($json[$start])) {
+        $json[$start] = [];
+    }
 
-	// For View
-	foreach ($videos as $video) {
-		$date = new DateTime($video['date']);
-		$start = $date->format('Ymd');
-		if(!$json[$start]){
-			$json[$start]=[];
-		}
-		$json[$start][] = [
-			't' 	=> $video['title'],
-			'i' 	=> $video['ytid']
-		];
-	}
+    $json[$start][] = [
+        't' => $video['title'],
+        'i' => $video['ytid'],
+    ];
+}
 
-	$date_start = substr($videos[0]['date'], 0, 10);
-	$date_stop  = substr($videos[count($videos)-1]['date'], 0, 10);
+$date_start = substr($videos[0]['date'], 0, 10);
+$date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -77,17 +72,16 @@
 
 			<div class="fullcal">
 				<h1>Casey Neistat Vlog Archive</h1>
-				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn’t find a way to see all his videos in a chronological order, so I decided to code this page using YouTube’s API, if you want to know more about this or me, go to the page bottom.</p>
+				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn't find a way to see all his videos in a chronological order, so I decided to code this page using YouTube's API, if you want to know more about this or me, go to the page bottom.</p>
 
 				<div class="cal"></div>
 
 
-				<p id="about"><strong>About this:</strong> YouTube/Google provide different APIs and you can do any kind of crazy stuff with them, like getting the complete uploads video playlist from any YouTube user, but that is half of work, then you have to present the data in a way it is pleasant to view, I tried many libraries already available online, but none did what I wanted, I tried a time-line, many calendars, but nothing, then I coded a <a href="alpha1/">“zooming” calendar</a>, but it didn’t work well on iOS, so following Casey’s philosophy, I keep it as simple as it can be.</p>
+				<p id="about"><strong>About this:</strong> YouTube/Google provide different APIs and you can do any kind of crazy stuff with them, like getting the complete uploads video playlist from any YouTube user, but that is half of work, then you have to present the data in a way it is pleasant to view, I tried many libraries already available online, but none did what I wanted, I tried a time-line, many calendars, but nothing, then I coded a <a href="alpha1/">"zooming" calendar</a>, but it didn't work well on iOS, so following Casey's philosophy, I keep it as simple as it can be.</p>
 				<p><strong>About me:</strong> My Name is Rodrigo Polo, a self-taught developer and entrepreneur with over 21 years of experience, currently working on two incredible projects, looking for <a href="http://rodrigopolo.com/contact">investors</a> for a third project. You can check my coding profiles on <a href="https://github.com/RodrigoPolo/">GitHub</a> and <a href="http://stackoverflow.com/users/218418/Rodrigo-Polo">Stack Overflow</a>, my Twitter profile in <a href="https://twitter.com/PoloPinetta">English</a> and <a href="https://twitter.com/RodrigoPolo">Spanish</a>, my YouTube channel in  <a href="http://www.youtube.com/c/RodrigoPolo">Spanish</a> and <a href="http://www.youtube.com/c/RodrigoPoloVlog">English</a>, my <a href="https://medium.com/@RodrigoPolo">Medium</a> profile, and my <a href="https://www.instagram.com/RodrigoPolo">Instagram</a> profile.</p>
 
 			</div>
 		</div>
-
 
 
 
@@ -102,14 +96,14 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
 
 		<script>
-			var date_start = '<?=$date_start?>';
-			var date_stop  = '<?=$date_stop?>';
-			var jsonx = <?=json_encode($json)?>
+			var date_start = '<?= htmlspecialchars($date_start, ENT_QUOTES) ?>';
+			var date_stop  = '<?= htmlspecialchars($date_stop,  ENT_QUOTES) ?>';
+			var jsonx = <?= json_encode($json, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 
 		</script>
 
 		<script src="main.js"></script>
-		
+
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

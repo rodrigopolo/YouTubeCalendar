@@ -1,13 +1,15 @@
 <?php
-// Error reporting
-error_reporting(E_ALL ^ E_NOTICE);
+
+// Error reporting — show all errors in development.
+// On production, set display_errors to 0 and log to a file instead.
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 // MySQL
 define('DB_HOST', 'HOST');
 define('DB_NAME', 'DB');
 define('DB_USERNAME', 'USER');
 define('DB_PASSWORD', 'pass');
-define('DB_FREEZE', true);
 
 // Debug
 define('APP_DEBUG', false);
