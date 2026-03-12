@@ -79,7 +79,7 @@ body{
 
 .c_col{
 	width: 1015px;
-	height: 580px;
+	min-height: 580px;
 	float: left;
 	margin: 0 0 50px 0;
 }
@@ -92,10 +92,11 @@ body{
 }
 
 .c_col .lb{
+	position: relative;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-attachment: fixed;
+	background-attachment: scroll;
 
 	display: block;
 	width: 145px;

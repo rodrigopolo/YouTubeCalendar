@@ -54,16 +54,7 @@ $date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 		<title>Casey Neistat Vlog Archive</title>
 
-		<!-- Bootstrap -->
-		<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="//maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js" rel="stylesheet">
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
 	<body>
 		<base target="_blank">
@@ -87,13 +78,7 @@ $date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 
 		<!-- JS -->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/depot/0.1.6/depot.min.js"></script>
-		<!--
-		<script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		-->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.13/dayjs.min.js"></script>
 
 		<script>
 			var date_start = '<?= htmlspecialchars($date_start, ENT_QUOTES) ?>';
@@ -104,6 +89,7 @@ $date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 		<script src="main.js"></script>
 
+		<!-- TODO: migrate to GA4 — UA-75532826-1 was sunset July 2024; replace with GA4 property ID -->
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
