@@ -61,8 +61,8 @@ $date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 
 			<div class="fullcal">
-				<h1>Casey Neistat Vlog Archive</h1>
-				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn't find a way to see all his videos in a chronological order, so I decided to code this page using YouTube's API, if you want to know more about this, the latest update, source code or me, go to the page bottom.</p>
+				<h1>Casey Neistat Archive (updated)</h1>
+				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn't find a way to see all his videos in a chronological order, so I decided to code this page using YouTube's API, if you want to know more about this, <span style="background: #ff0;">the latest update</span>, source code or me, go to the page bottom.</p>
 
 				<div class="cal"></div>
 
