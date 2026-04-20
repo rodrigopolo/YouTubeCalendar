@@ -62,13 +62,13 @@ $date_stop  = substr($videos[count($videos) - 1]['date'], 0, 10);
 
 			<div class="fullcal">
 				<h1>Casey Neistat Vlog Archive</h1>
-				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn't find a way to see all his videos in a chronological order, so I decided to code this page using YouTube's API, if you want to know more about this or me, go to the page bottom.</p>
+				<p>On march 25, 2015, Casey Neistat started a YouTube daily video log, amazingly he delivered, not only a daily video but sometimes two videos on the same day for almost a year. I was stunned when I discover Casey vlog but I didn't find a way to see all his videos in a chronological order, so I decided to code this page using YouTube's API, if you want to know more about this, the latest update, source code or me, go to the page bottom.</p>
 
 				<div class="cal"></div>
 
-
 				<p id="about"><strong>About this:</strong> YouTube/Google provide different APIs and you can do any kind of crazy stuff with them, like getting the complete uploads video playlist from any YouTube user, but that is half of work, then you have to present the data in a way it is pleasant to view, I tried many libraries already available online, but none did what I wanted, I tried a time-line, many calendars, but nothing, then I coded a <a href="alpha1/">"zooming" calendar</a>, but it didn't work well on iOS, so following Casey's philosophy, I keep it as simple as it can be.</p>
-				<p><strong>About me:</strong> My Name is Rodrigo Polo, a self-taught developer and entrepreneur with over 21 years of experience, currently working on two incredible projects, looking for <a href="http://rodrigopolo.com/contact">investors</a> for a third project. You can check my coding profiles on <a href="https://github.com/RodrigoPolo/">GitHub</a> and <a href="http://stackoverflow.com/users/218418/Rodrigo-Polo">Stack Overflow</a>, my Twitter profile in <a href="https://twitter.com/PoloPinetta">English</a> and <a href="https://twitter.com/RodrigoPolo">Spanish</a>, my YouTube channel in  <a href="http://www.youtube.com/c/RodrigoPolo">Spanish</a> and <a href="http://www.youtube.com/c/RodrigoPoloVlog">English</a>, my <a href="https://medium.com/@RodrigoPolo">Medium</a> profile, and my <a href="https://www.instagram.com/RodrigoPolo">Instagram</a> profile.</p>
+				<p><strong>2026 update:</strong> PHP has changed a lot, and the amount of videos made the page to long to scroll, so the whole project was refactored, if you have issues with the page, clean your cookies and cache, and reload the page.</p>
+				<p><strong>About me:</strong> My Name is Rodrigo Polo, a self-taught developer and entrepreneur with over 31 years of experience. You can check my coding profiles on <a href="https://github.com/RodrigoPolo/">GitHub</a> and <a href="http://stackoverflow.com/users/218418/Rodrigo-Polo">Stack Overflow</a>, my X profile in <a href="https://x.com/RealRodrigoPolo">@RealRodrigoPolo</a>, my tech YouTube channel in  <a href="https://www.youtube.com/@PolosTechLab">@PolosTechLab</a>, and my <a href="https://www.instagram.com/RodrigoPolo">Instagram</a> profile.</p>
 
 			</div>
 		</div>
